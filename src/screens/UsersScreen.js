@@ -5,7 +5,7 @@ import useFetch from '../hooks/useFetch';
 
 const UsersScreen = ({ navigation }) => {
 
-	const { loading, data: users } = useFetch('https://jsonplaceholder.typicode.com/users');
+	const { loading, data: users, error } = useFetch('https://jsonplaceholder.typicode.com/users');
 
 	const handlePressUser = (item) => () => {
 		navigation.navigate("Posts", { userId: item.id })

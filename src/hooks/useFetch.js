@@ -1,23 +1,28 @@
 import { useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 
 const useFetch = (url) => {
 
 	const [loading, setLoading] = useState();
 	const [data, setData] = useState();
+	const [error, setError] = useState();
 
 	const fetchData = async () => {
-		const response = await fetch(url);
-		const data = await response.json();
-		setLoading(false);
-		setData(data);
+		try {
+			const response = await fetch(url);
+			const data = await response.json();
+			setData(data);
+		} catch (error) {
+			setError(error);
+		} finally {
+			setLoading(false);
+		}
 	}
 
 	useEffect(() => {
 		fetchData();
 	}, [])
 
-	return { loading, data }
+	return { loading, data, error }
 }
 
 export default useFetch;
