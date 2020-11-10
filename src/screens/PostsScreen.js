@@ -1,23 +1,14 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import { StyleSheet, Text, View, FlatList } from 'react-native'
 import ListItem from '../components/ListItem'
+import useFetch from '../hooks/useFetch';
 
 const PostsScreen = ({ route, navigation }) => {
 	const { userId } = route.params;
-	const [loading, setLoading] = useState(true);
-	const [posts, setPosts] = useState(true);
 
-	const fetchPosts = async () => {
-		const response = await fetch('https://jsonplaceholder.typicode.com/posts');
-		let posts = await response.json();
-		posts = posts.filter(post => post.userId === userId)
-		setPosts(posts);
-		setLoading(false);
-	}
+	const { loading, data: posts } = useFetch('https://jsonplaceholder.typicode.com/posts');
 
-	useEffect(() => {
-		fetchPosts();
-	}, []);
+	const filteredPosts = posts ? posts.filter(post => post.userId === userId) : []
 
 	const handlePressPost = (item) => () => {
 		navigation.navigate("Detail", { ...item })
@@ -28,7 +19,7 @@ const PostsScreen = ({ route, navigation }) => {
 			{
 				loading ? <Text>Cargando...</Text> :
 				<FlatList
-					data={posts}
+					data={filteredPosts}
 					keyExtractor={item => String(item.id)}
 					renderItem={({ item }) => <ListItem name={item.title} onPress={handlePressPost(item)} />}
 				/>

@@ -1,11 +1,10 @@
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import DetailScreen from './Screes/DetailScreen';
-import PostsScreen from './Screes/PostsScreen';
-import UsersScreen from './Screes/UsersScreen';
+import { StyleSheet } from 'react-native';
+import DetailScreen from './src/screens/DetailScreen';
+import PostsScreen from './src/screens/PostsScreen';
+import UsersScreen from './src/screens/UsersScreen';
 
 const Stack = createStackNavigator();
 
