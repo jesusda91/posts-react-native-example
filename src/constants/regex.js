@@ -1,0 +1,1 @@
+export const emailRegex = /^([a-zA-Z0-9_.-]+)@([\da-zA-Z.-]+)\.([a-zA-Z.]{2,6})$/;
