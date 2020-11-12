@@ -9,8 +9,36 @@ import UsersScreen from './screens/UsersScreen';
 import * as routes from './constants/routes';
 import { getData } from './helpers/common-functions';
 import Loading from './components/utils/Loading';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import FormikScreen from './screens/Formik/FormikScreen';
 
 const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+const PostsAppStack = createStackNavigator();
+
+const PostsApp = () => (
+	<PostsAppStack.Navigator>
+		<PostsAppStack.Screen name={routes.usersRoute} component={UsersScreen} />
+		<PostsAppStack.Screen name={routes.postsRoute} component={PostsScreen} />
+		<PostsAppStack.Screen name={routes.detailRoute} component={DetailScreen} />
+	</PostsAppStack.Navigator>
+)
+
+const FormikAppStack = createStackNavigator();
+
+const FormikApp = () => (
+	<FormikAppStack.Navigator>
+		<FormikAppStack.Screen name={routes.formikRoute} component={FormikScreen} />
+	</FormikAppStack.Navigator>
+)
+
+const StackNavigatorForTabs = () => (
+	<Tab.Navigator>
+		<Tab.Screen name="Posts app" component={PostsApp} />
+		<Tab.Screen name="Formik app" component={FormikApp} />
+	</Tab.Navigator>
+)
 
 const Router = ({ isLoading, isLoggedIn, setIsLoggedIn }) => {
 
@@ -19,13 +47,12 @@ const Router = ({ isLoading, isLoggedIn, setIsLoggedIn }) => {
 		<NavigationContainer
 			initialRouteName="Home"
 		>
-			<Stack.Navigator>
+			<Stack.Navigator headerMode="none">
 				{isLoggedIn ? (
-					<>
-						<Stack.Screen name={routes.usersRoute} component={UsersScreen} />
-						<Stack.Screen name={routes.postsRoute} component={PostsScreen} />
-						<Stack.Screen name={routes.detailRoute} component={DetailScreen} />
-					</>
+					<Stack.Screen
+						name="StackNavigatorForTabs"
+						component={StackNavigatorForTabs}
+					/>
 				) : (
 						<>
 							<Stack.Screen name={routes.loginRoute}>
