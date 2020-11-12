@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAsyncData } from './helpers/common-functions';
 import Router from './Router';
 
 const App = () => {
@@ -8,7 +9,7 @@ const App = () => {
 
 	useEffect(()=>{
 		const getToken = async () => {
-			const token = await getData("token");
+			const token = await getAsyncData("token");
 			if (token) {
 				setIsLoggedIn(true);
 			}
@@ -21,6 +22,7 @@ const App = () => {
 		<Router
 			isLoading={isLoading}
 			isLoggedIn={isLoggedIn}
+			setIsLoggedIn={setIsLoggedIn}
 		/>
 	)
 }

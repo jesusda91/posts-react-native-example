@@ -12,7 +12,7 @@ import Loading from './components/utils/Loading';
 
 const Stack = createStackNavigator();
 
-const Router = ({ isLoading, isLoggedIn }) => {
+const Router = ({ isLoading, isLoggedIn, setIsLoggedIn }) => {
 
 	return (
 		isLoading ? <Loading /> :

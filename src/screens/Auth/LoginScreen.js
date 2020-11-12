@@ -2,7 +2,7 @@ import React from 'react'
 import { Button, StyleSheet, View } from 'react-native'
 import { TextInput } from 'react-native-gesture-handler'
 import { registerRoute } from '../../constants/routes'
-import { storeData } from '../../helpers/common-functions'
+import { storeAsyncData } from '../../helpers/common-functions'
 import useForm from '../../hooks/useForm'
 
 const LoginScreen = ({ navigation, setIsLoggedIn }) => {
@@ -22,7 +22,7 @@ const LoginScreen = ({ navigation, setIsLoggedIn }) => {
 			body: JSON.stringify(values)
 		}).then(x => x.json()).then(async user => {
 			if (user && user.token) {
-				await storeData("token", user.token);
+				await storeAsyncData("token", user.token);
 				setIsLoggedIn(true);
 			}
 		})
