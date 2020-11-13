@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import Text from './native/Text'
 
 const ListItem = ({ name, onPress }) => {
 	return (
@@ -28,6 +29,6 @@ const styles = StyleSheet.create({
 		justifyContent: "center"
 	},
 	text: {
-		fontSize: 18
+		fontSize: 18,
 	}
 })
